@@ -9,9 +9,9 @@ class Application{
 		$this->checkSession();
 		if(file_exists(CONTROLLER.$this->controller.'.php')){
 			$this->controller = new $this->controller;
-			var_dump($this->controller);
-			var_dump($this->action);
-			var_dump($_SESSION);
+			#var_dump($this->controller);
+			#var_dump($this->action);
+			#var_dump($_SESSION);
 			if(method_exists($this->controller,$this->action)){
 				//for eksempel hvis /login/ besøkes
 				//kjøres index funksjonen i login controller
@@ -26,6 +26,9 @@ class Application{
 			$url = explode('/',$request);
 			$this->controller = isset($url[0]) ? $url[0].'_controller':'login_controller';
 			$this->action = isset($url[1]) ? $url[1] : 'index';
+			if(count($_POST)>0){
+				$this->action=$this->action.'_post';
+			}
 			unset($url[0],$url[1]);
 			$this->prams = !empty($url) ? array_values($url):[];
 		} 
