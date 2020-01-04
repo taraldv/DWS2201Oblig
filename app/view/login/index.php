@@ -6,11 +6,8 @@
 <input type='submit' value='Logg inn'>
 </form>
 <?php 
-if(isset($_POST['email'])&&isset($_POST['password'])){
-	$email = $_POST['email'];
-	$password = $_POST['password'];
-	$this->viewData->verify($email,$password);
-	#$valid = $this->viewData->register($email,$password);
+if(!$this->viewData[0]){
+	echo "<h1>Wrong password or email</h1>";
 }
 ?>
 <?php include VIEW.'footer.php';?>

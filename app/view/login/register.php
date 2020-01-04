@@ -6,10 +6,8 @@
 <input type='submit' value='Registrer deg'>
 </form>
 <?php 
-if(isset($_POST['email'])&&isset($_POST['password'])){
-	$email = $_POST['email'];
-	$password = $_POST['password'];
-	$this->viewData->register($email,$password);
+if(!$this->viewData[0]){
+	echo '<h1> email in use </h1>';
 }
 ?>
 <?php include VIEW.'footer.php';?>
