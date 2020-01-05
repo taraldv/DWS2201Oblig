@@ -14,7 +14,7 @@
 	<ul>
 		<li><a href="/workout/index" <?php echo ($action == 'index' ? 'class=active' : '') ?>>Home</a></li>
 		<li><a href="/workout/add" <?php echo ($action == 'add' ? 'class=active' : '') ?>>Add</a></li>
-		<li><a href="/workout/change" <?php echo ($action == 'log' ? 'class=active' : '') ?>>Log</a></li>
+		<li><a href="/workout/log" <?php echo ($action == 'log' ? 'class=active' : '') ?>>Log</a></li>
 		<li><a href="/login/logout" <?php echo ($action == 'logout' ? 'class=active' : '') ?>>Logout</a></li>
 	</ul>
 </nav>

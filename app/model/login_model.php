@@ -1,13 +1,16 @@
 <?php
 class Login_model extends Model{
 	public function valid($email,$password){
-		$stmt = $this->prepare("SELECT hash FROM users WHERE email = :email;"); 
+		$stmt = $this->prepare("SELECT userId,hash FROM users WHERE email = :email;"); 
 		$stmt->bindParam(':email',$email);
 		$stmt->execute();
-		$hash = $stmt->fetch(PDO::FETCH_ASSOC)['hash'];
+		$arr = $stmt->fetch(PDO::FETCH_ASSOC);
+		$hash = $arr['hash'];
+		$id = $arr['userId'];
 		if(password_verify($password,$hash)){
 			session_start();
 			$_SESSION['email']=$email;
+			$_SESSION['id']=$id;
 			header('Location:../workout/');
 		} else {
 			return false;
