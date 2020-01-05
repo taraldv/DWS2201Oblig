@@ -1,6 +1,9 @@
 <?php
 class Login_controller extends Controller{
-
+	public function logout(){
+		session_destroy();
+		header("Location: /");	
+	}
 
 	public function index(){
 		$this->model('login_model');
