@@ -11,7 +11,7 @@ class Login_model extends Model{
 			session_start();
 			$_SESSION['email']=$email;
 			$_SESSION['id']=$id;
-			header('Location:../workout/');
+			return true;
 		} else {
 			return false;
 		}
@@ -22,11 +22,7 @@ class Login_model extends Model{
 		$stmt = $this->prepare("INSERT INTO users (email,hash) VALUES (:email,:hash);");
 		$stmt->bindParam(':email',$email);
 		$stmt->bindParam(':hash',$hash);
-		if($stmt->execute()){
-			header('Location:../login/');
-		} else {
-			return false;
-		}
+		return $stmt->execute();
 	}
 }
 ?>

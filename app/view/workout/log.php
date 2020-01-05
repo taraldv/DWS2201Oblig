@@ -1,6 +1,6 @@
 
 <?php include VIEW.'header.php';?>
-<form action='' method='post'>
+<form id='addLogForm'>
 	<select id='workoutSelect'>
 <?php
 foreach ($this->viewData[0] as $selectArr){
@@ -30,6 +30,7 @@ foreach ($this->viewData[1] as $arr){
 </table>
 <script>
 getWorkoutSelectId();
-enableDeleteButton('logId','deleteButton');
+enableDeleteButton('logId','deleteButton','delete_log');
+enableJavascriptForm('/workout/add_log','addLogForm');
 </script>
 <?php include VIEW.'footer.php';?>

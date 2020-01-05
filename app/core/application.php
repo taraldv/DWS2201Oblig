@@ -26,9 +26,9 @@ class Application{
 			$url = explode('/',$request);
 			$this->controller = isset($url[0]) ? $url[0].'_controller':'workout_controller';
 			$this->action = isset($url[1]) ? $url[1] : 'index';
-			if(count($_POST)>0){
+			/*if(count($_POST)>0){
 				$this->action=$this->action.'_post';
-			}
+			}*/
 			unset($url[0],$url[1]);
 			$this->prams = !empty($url) ? array_values($url):[];
 		} 

@@ -18,26 +18,37 @@ class Workout_controller extends Controller{
 		$this->view('workout'.'/'.'log.php',[$selects,$logHistory]);
 		$this->view->render();
 	}
-	public function log_post(){
-		$this->model('workout_model');
-		if($_POST['kilo']){
-			$this->model->logWorkout($_POST);
-		}
-		if($_POST['logId']){
-			$this->model->deleteLog($_POST['logId']);
-		}
-		$selects = $this->model->getWorkouts();
-		$logHistory = $this->model->getLog();
-		$this->view('workout'.'/'.'log.php',[$selects,$logHistory]);
-		$this->view->render();
 
+	public function add_log(){
+		$this->model('workout_model');
+		$successfullyAdded = $this->model->logWorkout($_POST);
+		if($successfullyAdded){
+		} else {
+			echo '0';
+		}
 	}
-	public function add_post(){	
+	public function delete_log(){
+		$this->model('workout_model');
+		$successfullyDeleted = $this->model->deleteLog($_POST['logId']);
+		echo "$successfullyDeleted";
+	}
+	public function add_workout(){	
 		$this->model('workout_model');
 		$name = $_POST['name'];
-		$this->model->addWorkout($name);
-		$selects = $this->model->getWorkouts();
-		$this->view('workout'.'/'.'add.php',$selects);
-		$this->view->render();
+		$lastInsertId = $this->model->addWorkout($name);
+		if(isset($lastInsertId)){
+			$element = "<tr><td>$name</td><td><div class='deleteButton' data=$lastInsertId>Slett</div></td></tr>";
+			echo "{\"element\":\"$element\",
+			\"idType\":\"workoutId\",
+			\"divClass\":\"deleteButton\",
+			\"url\":\"delete_workout\"}";
+		} else {
+			echo '0';
+		}
+	}
+	public function delete_workout(){	
+		$this->model('workout_model');
+		$successfullyDeleted = $this->model->deleteWorkout($_POST['workoutId']);
+		echo "$successfullyDeleted";
 	}
 }

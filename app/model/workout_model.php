@@ -6,6 +6,7 @@ class Workout_model extends Model{
 		$stmt->bindParam(':userId',$id);
 		$stmt->bindParam(':name',$name);
 		$stmt->execute();		
+		return $this->lastInsertId();
 	}
 	public function getWorkouts(){
 		$id = $_SESSION['id'];
@@ -27,6 +28,7 @@ class Workout_model extends Model{
 		$stmt->bindParam(':reps',$reps);
 		$stmt->bindParam(':kilo',$kilo);
 		$stmt->execute();
+		return $this->lastInsertId();
 	}
 	public function getLog(){
 		$userId = $_SESSION['id'];
@@ -45,18 +47,25 @@ class Workout_model extends Model{
 		$stmt = $this->prepare("DELETE FROM log WHERE logId = :logId AND userId = :userId;");
 		$stmt->bindParam(':logId',$logId);
 		$stmt->bindParam(':userId',$userId);
-		$stmt->execute();
+		return $stmt->execute();
 	}
 	public function deleteWorkout($workoutId){
 		$userId = $_SESSION['id'];
+		$this->beginTransaction();
 		$stmt = $this->prepare("DELETE FROM log WHERE workoutId = :workoutId AND userId = :userId;");
 		$stmt->bindParam(':workoutId',$workoutId);
 		$stmt->bindParam(':userId',$userId);
-		$stmt->execute();
-		$stmt = $this->prepare("DELETE FROM workout WHERE workoutId =: workoutId AND userId = :userId;");
+		$logRowsDeleted = $stmt->execute();
+		$stmt = $this->prepare("DELETE FROM workout WHERE workoutId = :workoutId AND userId = :userId;");
 		$stmt->bindParam(':workoutId',$workoutId);
 		$stmt->bindParam(':userId',$userId);
-		$stmt->execute();
+		$workoutDeleted = $stmt->execute();
+		if($logRowsDeleted && $workoutDeleted){
+			$this->commit();
+		} else {
+			$this->rollback();
+		}
+		return ($logRowsDeleted && $workoutDeleted);
 		
 	}
 }

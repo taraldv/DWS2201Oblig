@@ -1,6 +1,6 @@
 
 <?php include VIEW.'header.php';?>
-<form action='' method='post'>
+<form id='addWorkoutForm'>
 	<input type='text' name='name'>
 	<input type='submit' value='Legg til øvelse'>
 </form>
@@ -15,6 +15,7 @@ foreach ($this->viewData as $arr){
 ?>
 </table>
 <script>
-enableDeleteButton('workoutId','deleteButton');
+enableDeleteButton('workoutId','deleteButton','delete_workout');
+enableJavascriptForm('/workout/add_workout','addWorkoutForm');
 </script>
 <?php include VIEW.'footer.php';?>

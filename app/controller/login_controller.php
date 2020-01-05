@@ -17,22 +17,30 @@ class Login_controller extends Controller{
 		$this->view->render();	
 	}
 
-	public function index_post(){
+	public function valid_login(){
 		$this->model('login_model');
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 		$valid = $this->model->valid($email,$password);
-		$this->view('login'.'/'.'index.php',[$valid]);
-		$this->view->render();	
+		if($valid){
+			header("Location: /workout/");
+		} else {
+			$this->view('login'.'/'.'index.php',[$valid]);
+			$this->view->render();	
+		}
 	}
 
-	public function register_post(){
+	public function add_user(){
 		$this->model('login_model');
 		$email = $_POST['email'];
 		$password = $_POST['password'];
-		$inUse = $this->model->register($email,$password);
-		$this->view('login'.'/'.'register.php',[$inUse]);
-		$this->view->render();	
+		$successfullyAdded = $this->model->register($email,$password);
+		if($successfullyAdded){
+			header("Location: /login");
+		} else {
+			$this->view('login'.'/'.'register.php',[$successfullyAdded]);
+			$this->view->render();	
+		}
 	}
 }
 ?>

@@ -1,6 +1,6 @@
 <?php include VIEW.'clean_header.php';?>
 
-<form action='' method='post'>
+<form action='/login/add_user' method='post'>
 <input type='text' name='email'>
 <input type='password' name='password'>
 <input type='submit' value='Registrer deg'>
@@ -10,5 +10,8 @@ if(!$this->viewData[0]){
 	echo '<h1> email in use </h1>';
 }
 ?>
+<script>
+
+</script>
 <?php include VIEW.'footer.php';?>
 

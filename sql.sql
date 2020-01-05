@@ -13,14 +13,14 @@ CREATE TABLE users(
 CREATE TABLE workout(
 	workoutId INTEGER AUTO_INCREMENT,
 	userId INTEGER NOT NULL,
-	name vARCHAR(255),
+	name vARCHAR(255) NOT NULL,
 	PRIMARY KEY (workoutId),
 	FOREIGN KEY (userId) REFERENCES users(userId));
 CREATE TABLE log(
 	`logId` INTEGER AUTO_INCREMENT,
 	`workoutId` INTEGER NOT NULL,
 	`userId` INTEGER NOT NULL,
-	`reps` INTEGER,
+	`reps` INTEGER NOT NULL,
 	`date` DATE,
 	`kilo` DECIMAL(10,2),
 	PRIMARY KEY (logId),
