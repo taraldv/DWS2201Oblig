@@ -31,7 +31,7 @@ class Workout_model extends Model{
 	public function getLog(){
 		$userId = $_SESSION['id'];
 		$stmt = $this->prepare("SELECT 
-			logId,w.name,reps,kilo,DATE_FORMAT(date,'%d.%m.%y') as date 
+			logId,w.name,reps,kilo,DATE_FORMAT(date,'%d.%m.%Y') as date 
 			FROM log LEFT JOIN workout w on log.workoutId = w.workoutId 
 			WHERE log.userId = :userId;");
 		$stmt->bindParam(':userId',$userId);
@@ -39,6 +39,25 @@ class Workout_model extends Model{
 		$result = $stmt->fetchAll();
 		return $result;
 	
+	}
+	public function deleteLog($logId){
+		$userId = $_SESSION['id'];
+		$stmt = $this->prepare("DELETE FROM log WHERE logId = :logId AND userId = :userId;");
+		$stmt->bindParam(':logId',$logId);
+		$stmt->bindParam(':userId',$userId);
+		$stmt->execute();
+	}
+	public function deleteWorkout($workoutId){
+		$userId = $_SESSION['id'];
+		$stmt = $this->prepare("DELETE FROM log WHERE workoutId = :workoutId AND userId = :userId;");
+		$stmt->bindParam(':workoutId',$workoutId);
+		$stmt->bindParam(':userId',$userId);
+		$stmt->execute();
+		$stmt = $this->prepare("DELETE FROM workout WHERE workoutId =: workoutId AND userId = :userId;");
+		$stmt->bindParam(':workoutId',$workoutId);
+		$stmt->bindParam(':userId',$userId);
+		$stmt->execute();
+		
 	}
 }
 ?>

@@ -24,7 +24,7 @@ foreach ($this->viewData[1] as $arr){
 	$reps=$arr['reps'];
 	$date=$arr['date'];
 	$kilo=$arr['kilo'];
-	echo "<tr><td data=$id>$name</td><td>$reps</td><td>$kilo</td><td>$date</td><td></td></tr>";
+	echo "<tr><td data=$id>$name</td><td>$reps</td><td>$kilo</td><td>$date</td><td><div class='deleteButton'>Slett logg</div></td></tr>";
 }
 ?>
 </table>

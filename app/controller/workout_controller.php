@@ -20,7 +20,12 @@ class Workout_controller extends Controller{
 	}
 	public function log_post(){
 		$this->model('workout_model');
-		$this->model->logWorkout($_POST);
+		if($_POST['kilo']){
+			$this->model->logWorkout($_POST);
+		}
+		if($_POST['logId']){
+			$this->model->deleteLog($_POST['logId']);
+		}
 		$selects = $this->model->getWorkouts();
 		$logHistory = $this->model->getLog();
 		$this->view('workout'.'/'.'log.php',[$selects,$logHistory]);
