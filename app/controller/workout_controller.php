@@ -10,8 +10,9 @@ class Workout_controller extends Controller{
 		$this->view('workout'.'/'.'add.php',$this->model);
 		$this->view->render();
 	}
-	public function change(){
+	public function log(){
 		$this->model('workout_model');
-		$this->view('workout'.'/'.'change.php',$this->model);
+		$this->view('workout'.'/'.'log.php',$this->model);
 		$this->view->render();
 	}
+}
