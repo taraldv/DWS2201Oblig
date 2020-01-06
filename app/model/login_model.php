@@ -1,13 +1,14 @@
 <?php
 class Login_model extends Model{
-	public function valid($email,$password){
-		$stmt = $this->prepare("SELECT userId,hash FROM users WHERE email = :email;"); 
+	public function validLogin($email,$password){
+		$stmt = $this->prepare("SELECT userId,hash,verified FROM users WHERE email = :email;"); 
 		$stmt->bindParam(':email',$email);
 		$stmt->execute();
 		$arr = $stmt->fetch(PDO::FETCH_ASSOC);
 		$hash = $arr['hash'];
 		$id = $arr['userId'];
-		if(password_verify($password,$hash)){
+		$verified = $arr['verified'];
+		if($verified && password_verify($password,$hash)){
 			session_start();
 			$_SESSION['email']=$email;
 			$_SESSION['id']=$id;
@@ -24,6 +25,12 @@ class Login_model extends Model{
 		$stmt->bindParam(':hash',$hash);
 		$stmt->bindParam(':token',$token);
 		return $stmt->execute();
+	}
+
+	public function validEmail($token){
+		$stmt = $this->prepare("UPDATE users SET verified = TRUE,token='' WHERE token = :token;");
+		$stmt->bindParam(':token',$token);
+		return $stmt->execute();	
 	}
 }
 ?>

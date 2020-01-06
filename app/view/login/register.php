@@ -8,9 +8,9 @@
 <?php 
 if(isset($this->viewData[0])){
 	if($this->viewData[0]){
-		echo '<h1> Check email for verification </h1>';
+		echo '<h1>Sjekk epost for bekreftelse</h1>';
 	} else {
-		echo '<h1> Email in use </h1>';
+		echo '<h1>Epost er i bruk, prøv glemt passord</h1>';
 	}
 }
 ?>

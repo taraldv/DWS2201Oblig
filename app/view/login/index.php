@@ -10,7 +10,7 @@
 <a href='/login/forgotten'>Glemt passord</a>
 <?php 
 if(!$this->viewData[0]){
-	echo "<h1>Wrong password or email</h1>";
+	echo "<h1>Feil epost,passord eller ikke bekreftet epost</h1>";
 }
 ?>
 <?php include VIEW.'footer.php';?>

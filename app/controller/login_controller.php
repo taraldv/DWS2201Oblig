@@ -7,9 +7,16 @@ class Login_controller extends Controller{
 
 	public function verify($prams){
 		$this->model('login_model');
-		var_dump($prams);
-		$this->view('login'.'/'.'verify.php');
-		$this->view->render();	
+		$update = $this->model->validEmail($prams);
+		if($update){
+			header("Location: /login");
+		} else {
+		//TODO feil ved token
+		}
+	}
+
+	public function update_password(){
+	
 	}
 
 	public function index(){
@@ -28,7 +35,7 @@ class Login_controller extends Controller{
 		$this->model('login_model');
 		$email = $_POST['email'];
 		$password = $_POST['password'];
-		$valid = $this->model->valid($email,$password);
+		$valid = $this->model->validLogin($email,$password);
 		if($valid){
 			header("Location: /workout/");
 		} else {
