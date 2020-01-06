@@ -21,8 +21,22 @@ class Workout_controller extends Controller{
 
 	public function add_log(){
 		$this->model('workout_model');
-		$successfullyAdded = $this->model->logWorkout($_POST);
-		if($successfullyAdded){
+		$name = $_POST['name'];
+		$kilo = $_POST['kilo'];
+		$reps = $_POST['reps'];
+		$workoutId = $_POST['workoutId'];
+		$lastInsertArray = $this->model->logWorkout($kilo,$reps,$workoutId);
+		if($lastInsertArray){
+			$name = $lastInsertArray['name'];
+			$reps = $lastInsertArray['reps'];
+			$kilo = $lastInsertArray['kilo'];
+			$date = $lastInsertArray['date'];
+			$id = $lastInsertArray['id'];
+			$element = "<tr><td>$name</td><td>$reps</td><td>$kilo</td><td>$date</td><td><div data=$id class='deleteButton'>Slett</div></td></tr>";
+			echo "{\"element\":\"$element\",
+			\"idType\":\"logId\",
+			\"divClass\":\"deleteButton\",
+			\"url\":\"delete_log\"}";
 		} else {
 			echo '0';
 		}

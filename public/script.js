@@ -5,6 +5,10 @@ function getWorkoutSelectId(){
 			let selected = select.options[select.selectedIndex];
 			let id = selected.getAttribute('data');
 			let idInput = document.getElementById('workoutId');
+			let nameInput = document.getElementById('workoutName');
+			idInput.value = id;
+			nameInput.value = selected.innerText;
+			nameInput.setAttribute('value',selected.innerText);
 			idInput.setAttribute('value',id);
 		});
 	}
@@ -35,16 +39,15 @@ function enableJavascriptForm(url,formId){
 		e.preventDefault();
 		let dataString = "";
 		let formChildren = formElement.querySelectorAll('input');
-		console.log(formChildren);
 		for(let i=0;i<formChildren.length;i++){
 			let tempInput = formChildren[i];
 			let name = tempInput.getAttribute('name');
 			if(name){
 				let hiddenValue = tempInput.getAttribute('value');
 				let value = tempInput.value;
-				if(hiddenValue){
+				/*if(hiddenValue){
 					value = hiddenValue;
-				}
+				}*/
 				dataString += name+'='+value+'&';
 			}
 		}

@@ -16,10 +16,7 @@ class Workout_model extends Model{
 		$result = $stmt->fetchAll();
 		return $result;
 	}
-	public function logWorkout($dataArray){
-		$kilo = $dataArray['kilo'];
-		$reps = $dataArray['reps'];
-		$workoutId = $dataArray['workoutId'];
+	public function logWorkout($kilo,$reps,$workoutId){
 		$userId = $_SESSION['id'];
 		$stmt = $this->prepare("INSERT INTO log (workoutId,userId,reps,kilo,date) 
 			VALUES (:workoutId,:userId,:reps,:kilo,CURDATE());");
@@ -27,8 +24,19 @@ class Workout_model extends Model{
 		$stmt->bindParam(':userId',$userId);
 		$stmt->bindParam(':reps',$reps);
 		$stmt->bindParam(':kilo',$kilo);
-		$stmt->execute();
-		return $this->lastInsertId();
+		if($stmt->execute()){
+			$lastInsertId = $this->lastInsertId();	
+			$stmt = $this->prepare("SELECT 
+				logId as id,w.name as name,reps,kilo,DATE_FORMAT(date,'%d.%m.%Y') as date 
+				FROM log LEFT JOIN workout w on log.workoutId = w.workoutId 
+				WHERE log.logId = :logId;");
+			$stmt->bindParam(':logId',$lastInsertId);
+			$stmt->execute();
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			return $result;
+		} else {
+			return 0;
+		}
 	}
 	public function getLog(){
 		$userId = $_SESSION['id'];
