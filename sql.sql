@@ -7,7 +7,8 @@ CREATE TABLE users(
 	userId INTEGER AUTO_INCREMENT,
 	email VARCHAR(150) UNIQUE,
 	hash VARCHAR(255),
-	reset VARCHAR(255),
+	token VARCHAR(100),
+	verified BOOLEAN DEFAULT FALSE,
 	PRIMARY KEY (userId));
 
 CREATE TABLE workout(
@@ -16,6 +17,7 @@ CREATE TABLE workout(
 	name vARCHAR(255) NOT NULL,
 	PRIMARY KEY (workoutId),
 	FOREIGN KEY (userId) REFERENCES users(userId));
+
 CREATE TABLE log(
 	`logId` INTEGER AUTO_INCREMENT,
 	`workoutId` INTEGER NOT NULL,

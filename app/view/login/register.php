@@ -6,12 +6,13 @@
 <input type='submit' value='Registrer deg'>
 </form>
 <?php 
-if(!$this->viewData[0]){
-	echo '<h1> email in use </h1>';
+if(isset($this->viewData[0])){
+	if($this->viewData[0]){
+		echo '<h1> Check email for verification </h1>';
+	} else {
+		echo '<h1> Email in use </h1>';
+	}
 }
 ?>
-<script>
-
-</script>
 <?php include VIEW.'footer.php';?>
 

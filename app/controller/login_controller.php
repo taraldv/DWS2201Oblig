@@ -5,6 +5,13 @@ class Login_controller extends Controller{
 		header("Location: /");	
 	}
 
+	public function verify($prams){
+		$this->model('login_model');
+		var_dump($prams);
+		$this->view('login'.'/'.'verify.php');
+		$this->view->render();	
+	}
+
 	public function index(){
 		$this->model('login_model');
 		$this->view('login'.'/'.'index.php',[TRUE]);
@@ -13,7 +20,7 @@ class Login_controller extends Controller{
 
 	public function register(){
 		$this->model('login_model');
-		$this->view('login'.'/'.'register.php',[TRUE]);
+		$this->view('login'.'/'.'register.php');
 		$this->view->render();	
 	}
 
@@ -34,13 +41,17 @@ class Login_controller extends Controller{
 		$this->model('login_model');
 		$email = $_POST['email'];
 		$password = $_POST['password'];
-		$successfullyAdded = $this->model->register($email,$password);
+		//https://stackoverflow.com/questions/4356289/php-random-string-generator/31107425#31107425
+		$token = substr(md5(mt_rand()), 0, 100);
+		$mail = new Mail('Oblig.tarves.no epost verifisering',$email);
+		$mail->setMailBody('Trykk på linken for å verifisere epost',$token,'Link');
+		$successfullyAdded = $this->model->register($email,$password,$token);
 		if($successfullyAdded){
-			header("Location: /login");
-		} else {
-			$this->view('login'.'/'.'register.php',[$successfullyAdded]);
-			$this->view->render();	
-		}
+			$mail->sendMail();
+		}	
+		$this->view('login'.'/'.'register.php',[$successfullyAdded]);
+		$this->view->render();	
+		
 	}
 }
 ?>

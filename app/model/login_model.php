@@ -17,11 +17,12 @@ class Login_model extends Model{
 		}
 	}
 
-	public function register($email,$password){
+	public function register($email,$password,$token){
 		$hash = password_hash($password,PASSWORD_DEFAULT);
-		$stmt = $this->prepare("INSERT INTO users (email,hash) VALUES (:email,:hash);");
+		$stmt = $this->prepare("INSERT INTO users (email,hash,token) VALUES (:email,:hash,:token);");
 		$stmt->bindParam(':email',$email);
 		$stmt->bindParam(':hash',$hash);
+		$stmt->bindParam(':token',$token);
 		return $stmt->execute();
 	}
 }
