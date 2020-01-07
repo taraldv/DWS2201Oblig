@@ -16,6 +16,19 @@ class Workout_model extends Model{
 		$result = $stmt->fetchAll();
 		return $result;
 	}
+
+	public function getSpecificLogHistory($workoutId){
+		$userId = $_SESSION['id'];
+		$stmt = $this->prepare("SELECT 
+			logId,reps,kilo,DATE_FORMAT(date,'%d.%m.%Y') as date FROM log
+			WHERE log.userId = :userId AND log.workoutId = :workoutId;");
+		$stmt->bindParam(':userId',$userId);
+		$stmt->bindParam(':workoutId',$workoutId);
+		$stmt->execute();
+		$result = $stmt->fetchAll();
+		return $result;
+
+	}
 	public function logWorkout($kilo,$reps,$workoutId){
 		$userId = $_SESSION['id'];
 		$stmt = $this->prepare("INSERT INTO log (workoutId,userId,reps,kilo,date) 

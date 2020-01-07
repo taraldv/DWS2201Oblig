@@ -1,17 +1,50 @@
+function getWorkoutSelectData(){
+	let select = document.getElementById('workoutSelect');
+	let fun = function(){
+		let selected = select.options[select.selectedIndex];
+		let id = selected.getAttribute('data');
+		let request = new XMLHttpRequest();
+		request.addEventListener("load",buildSpecificLogTable);
+		request.open("POST","/workout/get_specific_workout");
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		request.send("id="+id);
+	};
+	select.addEventListener('change',fun);	
+	fun();
+}
+
+function buildSpecificLogTable(){
+	let table = document.getElementById("logTable");
+	let deleteRows = table.getElementsByClassName('generatedRow');
+	for(let j=0;j<deleteRows.length;j++){
+		deleteRows[j].remove();
+	}
+	let data = JSON.parse(this.response);
+	let keys = Object.keys(data);
+	for(let i=0;i<keys.length;i++){
+		let tempObject = data[i];
+		let id = tempObject[0];
+		let kilo = tempObject[1];
+		let reps = tempObject[2];
+		let dato = tempObject[3];
+		let string = "<tr class='generatedRow'><td>"+reps+"</td><td>"+kilo+"</td><td>"+dato+"</td><td><button class=deleteButton btn btn-block btn-secondary data="+id+">Slett</button></td></tr>";
+		table.insertAdjacentHTML('beforeend',string);
+	}
+	enableDeleteButton('logId','deleteButton','delete_log');
+}
+
 function getWorkoutSelectId(){
 	let select = document.getElementById('workoutSelect');
-	if(select){
-		select.addEventListener("change",function(){
-			let selected = select.options[select.selectedIndex];
-			let id = selected.getAttribute('data');
-			let idInput = document.getElementById('workoutId');
-			let nameInput = document.getElementById('workoutName');
-			idInput.value = id;
-			nameInput.value = selected.innerText;
-			nameInput.setAttribute('value',selected.innerText);
-			idInput.setAttribute('value',id);
-		});
-	}
+	select.addEventListener("change",function(){
+		let selected = select.options[select.selectedIndex];
+		let id = selected.getAttribute('data');
+		let idInput = document.getElementById('workoutId');
+		let nameInput = document.getElementById('workoutName');
+		idInput.value = id;
+		nameInput.value = selected.innerText;
+		nameInput.setAttribute('value',selected.innerText);
+		idInput.setAttribute('value',id);
+	});
 }
 function enableDeleteButton(idType,divClass,url){
 	let btns = document.getElementsByClassName(divClass);

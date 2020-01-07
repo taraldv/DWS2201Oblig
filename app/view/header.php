@@ -1,5 +1,5 @@
 <?php 
-	$action = $this->getAction();
+$action = $this->getAction();
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,11 +12,17 @@
 <body>
 <script src='/script.js'></script>
 <nav>
-	<ul>
-		<li><a href="/workout/index" <?php echo ($action == 'index' ? 'class=active' : '') ?>>Home</a></li>
-		<li><a href="/workout/add" <?php echo ($action == 'add' ? 'class=active' : '') ?>>Add</a></li>
-		<li><a href="/workout/log" <?php echo ($action == 'log' ? 'class=active' : '') ?>>Log</a></li>
-		<li><a href="/login/logout" <?php echo ($action == 'logout' ? 'class=active' : '') ?>>Logout</a></li>
+	<ul class='nav nav-pills justify-content-center'>
+	<li class='nav-item'><a class='nav-link <?php
+		echo ($action == 'index.php' ? 'active' : '')
+	?>' href="/workout/index">Home</a></li>
+	<li class='nav-item'><a class='nav-link <?php
+		echo ($action == 'add.php' ? 'active' : '')
+	?>' href="/workout/add">Legg til øvelse</a></li>
+	<li class='nav-item'><a class='nav-link <?php
+		echo ($action == 'log.php' ? 'active' : '')
+	?>' href="/workout/log">Logg øvelse</a></li>
+		<li class='nav-item'><a class='nav-link' href="/login/logout">Logout</a></li>
 	</ul>
 </nav>
 

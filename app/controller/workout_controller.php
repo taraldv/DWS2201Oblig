@@ -2,8 +2,16 @@
 class Workout_controller extends Controller{
 	public function index(){
 		$this->model('workout_model');
-		$this->view('workout'.'/'.'index.php');
+		$selects = $this->model->getWorkouts();
+		$logHistory = $this->model->getLog();
+		$this->view('workout'.'/'.'index.php',[$selects]);
 		$this->view->render();
+	}
+	public function get_specific_workout(){
+		$this->model('workout_model');
+		$workoutId = $_POST['id'];
+		$dataArray = $this->model->getSpecificLogHistory($workoutId);
+		echo (json_encode($dataArray));
 	}
 	public function add(){
 		$this->model('workout_model');
@@ -32,7 +40,7 @@ class Workout_controller extends Controller{
 			$kilo = $lastInsertArray['kilo'];
 			$date = $lastInsertArray['date'];
 			$id = $lastInsertArray['id'];
-			$element = "<tr><td>$name</td><td>$reps</td><td>$kilo</td><td>$date</td><td><div data=$id class='deleteButton'>Slett</div></td></tr>";
+			$element = "<tr><td>$name</td><td>$reps</td><td>$kilo</td><td>$date</td><td><button data=$id class='deleteButton btn btn-block btn-secondary'>Slett</button></td></tr>";
 			echo "{\"element\":\"$element\",
 			\"idType\":\"logId\",
 			\"divClass\":\"deleteButton\",
@@ -51,7 +59,7 @@ class Workout_controller extends Controller{
 		$name = $_POST['name'];
 		$lastInsertId = $this->model->addWorkout($name);
 		if(isset($lastInsertId)){
-			$element = "<tr><td>$name</td><td><div class='deleteButton' data=$lastInsertId>Slett</div></td></tr>";
+			$element = "<tr><td>$name</td><td><button class='deleteButton btn btn-block btn-secondary' data=$lastInsertId>Slett</button></td></tr>";
 			echo "{\"element\":\"$element\",
 			\"idType\":\"workoutId\",
 			\"divClass\":\"deleteButton\",
