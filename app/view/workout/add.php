@@ -16,6 +16,6 @@ foreach ($this->viewData as $arr){
 </table>
 <script>
 enableDeleteButton('workoutId','deleteButton','delete_workout');
-enableJavascriptForm('/workout/add_workout','addWorkoutForm');
+enableJavascriptForm('/workout/add_workout','addWorkoutForm',appendTable);
 </script>
 <?php include VIEW.'footer.php';?>

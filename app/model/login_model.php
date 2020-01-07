@@ -32,5 +32,20 @@ class Login_model extends Model{
 		$stmt->bindParam(':token',$token);
 		return $stmt->execute();	
 	}
+
+	public function setNewToken($email,$token){
+		$stmt = $this->prepare("UPDATE users SET token = :token WHERE email = :email;");
+		$stmt->bindParam(':token',$token);
+		$stmt->bindParam(':email',$email);
+		return $stmt->execute();
+	}
+
+	public function updatePassword($token,$password){
+		$hash = password_hash($password,PASSWORD_DEFAULT);
+		$stmt = $this->prepare("UPDATE users set hash = :hash,token='' WHERE token = :token;");
+		$stmt->bindParam(':hash',$hash);
+		$stmt->bindParam(':token',$token);
+		return $stmt->execute();
+	}
 }
 ?>

@@ -32,6 +32,6 @@ foreach ($this->viewData[1] as $arr){
 <script>
 getWorkoutSelectId();
 enableDeleteButton('logId','deleteButton','delete_log');
-enableJavascriptForm('/workout/add_log','addLogForm');
+enableJavascriptForm('/workout/add_log','addLogForm',appendTable);
 </script>
 <?php include VIEW.'footer.php';?>

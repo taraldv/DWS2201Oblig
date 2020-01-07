@@ -33,7 +33,21 @@ function enableDeleteButton(idType,divClass,url){
 		});
 	}
 }
-function enableJavascriptForm(url,formId){
+function appendTable(){
+	if(this.response != 0){
+		let data = JSON.parse(this.response);
+		let table = document.querySelector('table');
+		table.insertAdjacentHTML('beforeend',data['element']);
+		enableDeleteButton(data['idType'],data['divClass'],data['url']);
+	}
+
+}
+function appendParagraph(){
+	if(this.response==1){
+	document.body.insertAdjacentHTML('beforeend','<h1>Epost har blitt sendt, husk å sjekke spam</h1>');
+	}
+}
+function enableJavascriptForm(url,formId,func){
 	let formElement = document.getElementById(formId);
 	formElement.addEventListener("submit",function(e){
 		e.preventDefault();
@@ -52,14 +66,7 @@ function enableJavascriptForm(url,formId){
 			}
 		}
 		let request = new XMLHttpRequest();
-		request.addEventListener("load",function(){
-			if(this.response != 0){
-				let data = JSON.parse(this.response);
-				let table = document.querySelector('table');
-				table.insertAdjacentHTML('beforeend',data['element']);
-				enableDeleteButton(data['idType'],data['divClass'],data['url']);
-			}
-		});
+		request.addEventListener("load",func);
 		request.open("POST",url);
 		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 		request.send(dataString);

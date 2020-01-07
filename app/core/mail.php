@@ -6,15 +6,17 @@ class Mail{
 	private $content = '"Content-Type: text/html"';
 	private $subject;
 	private $body;
+	private $url;
 
-	public function __construct($subject,$email){
+	public function __construct($subject,$email,$url){
 		$this->subject = $subject;
 		$this->email = $email;
+		$this->url = $url;
 	}
 
 	public function setMailBody($bodyDescription,$token,$linkDescription){
 		$this->body = "\"<html><body><p>$bodyDescription</p>
-			<a href='https://oblig.tarves.no/login/verify/$token'>$linkDescription</a>
+			<a href='https://oblig.tarves.no$this->url/$token'>$linkDescription</a>
 			</body></html>\"";
 	}
 

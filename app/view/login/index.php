@@ -7,7 +7,7 @@
 </form>
 <a href='/login/register'>Registrer deg</a>
 <br>
-<a href='/login/forgotten'>Glemt passord</a>
+<a href='/login/forgotten_password'>Glemt passord</a>
 <?php 
 if(!$this->viewData[0]){
 	echo "<h1>Feil epost,passord eller ikke bekreftet epost</h1>";
