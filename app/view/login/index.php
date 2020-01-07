@@ -1,6 +1,6 @@
 <?php include VIEW.'clean_header.php';?>
 <div class='container'>
-<form action='/login/valid_login' method='post'>
+<form class='' action='/login/valid_login' method='post'>
 <div class="form-group">
 	<label for="email">Epost:</label>
 	<input class="form-control" type='text' name='email' id="email">
