@@ -42,7 +42,7 @@ class Login_model extends Model{
 
 	public function updatePassword($token,$password){
 		$hash = password_hash($password,PASSWORD_DEFAULT);
-		$stmt = $this->prepare("UPDATE users set hash = :hash,token='' WHERE token = :token;");
+		$stmt = $this->prepare("UPDATE users set hash = :hash WHERE token = :token;");
 		$stmt->bindParam(':hash',$hash);
 		$stmt->bindParam(':token',$token);
 		return $stmt->execute();
