@@ -28,7 +28,7 @@ class Login_model extends Model{
 	}
 
 	public function validEmail($token){
-		$stmt = $this->prepare("UPDATE users SET verified = TRUE,token='' WHERE token = :token;");
+		$stmt = $this->prepare("UPDATE users SET verified = TRUE WHERE token = :token;");
 		$stmt->bindParam(':token',$token);
 		return $stmt->execute();	
 	}
