@@ -1,26 +1,26 @@
 <?php
-class Workout_controller extends Controller{
+class WorkoutController extends Controller{
 	public function index(){
-		$this->model('workout_model');
+		$this->model('WorkoutModel');
 		$selects = $this->model->getWorkouts();
 		$logHistory = $this->model->getLog();
 		$this->view('workout'.'/'.'index.php',[$selects]);
 		$this->view->render();
 	}
 	public function get_specific_workout(){
-		$this->model('workout_model');
+		$this->model('WorkoutModel');
 		$workoutId = $_POST['id'];
 		$dataArray = $this->model->getSpecificLogHistory($workoutId);
 		echo (json_encode($dataArray));
 	}
 	public function add(){
-		$this->model('workout_model');
+		$this->model('WorkoutModel');
 		$selects = $this->model->getWorkouts();
 		$this->view('workout'.'/'.'add.php',$selects);
 		$this->view->render();
 	}
 	public function log(){
-		$this->model('workout_model');
+		$this->model('WorkoutModel');
 		$selects = $this->model->getWorkouts();
 		$logHistory = $this->model->getLog();
 		$this->view('workout'.'/'.'log.php',[$selects,$logHistory]);
@@ -28,7 +28,7 @@ class Workout_controller extends Controller{
 	}
 
 	public function add_log(){
-		$this->model('workout_model');
+		$this->model('WorkoutModel');
 		$name = $_POST['name'];
 		$kilo = $_POST['kilo'];
 		$reps = $_POST['reps'];
@@ -50,12 +50,12 @@ class Workout_controller extends Controller{
 		}
 	}
 	public function delete_log(){
-		$this->model('workout_model');
+		$this->model('WorkoutModel');
 		$successfullyDeleted = $this->model->deleteLog($_POST['logId']);
 		echo "$successfullyDeleted";
 	}
 	public function add_workout(){	
-		$this->model('workout_model');
+		$this->model('WorkoutModel');
 		$name = $_POST['name'];
 		$lastInsertId = $this->model->addWorkout($name);
 		if(isset($lastInsertId)){
@@ -69,7 +69,7 @@ class Workout_controller extends Controller{
 		}
 	}
 	public function delete_workout(){	
-		$this->model('workout_model');
+		$this->model('WorkoutModel');
 		$successfullyDeleted = $this->model->deleteWorkout($_POST['workoutId']);
 		echo "$successfullyDeleted";
 	}

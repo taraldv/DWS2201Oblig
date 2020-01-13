@@ -1,12 +1,12 @@
 <?php
-class Login_controller extends Controller{
+class LoginController extends Controller{
 	public function logout(){
 		session_destroy();
 		header("Location: /");	
 	}
 
 	public function verify($prams){
-		$this->model('login_model');
+		$this->model('LoginModel');
 		$update = $this->model->validEmail($prams);
 		if($update){
 			header("Location: /login");
@@ -16,7 +16,7 @@ class Login_controller extends Controller{
 	}
 
 	public function send_password_link(){	
-		$this->model('login_model');
+		$this->model('LoginModel');
 		$email = $_POST['email'];
 		$token = substr(md5(mt_rand()), 0, 100);
 		$mail = new Mail('Reset passord til oblig.tarves.no',$email,'/login/new_password');
@@ -29,7 +29,7 @@ class Login_controller extends Controller{
 	}
 
 	public function update_password(){
-		$this->model('login_model');
+		$this->model('LoginModel');
 		$token = $_POST['token'];
 		//Default token er empty string, så den kan ikke være en gyldig POST parameter
 		if(empty($token)){
@@ -45,31 +45,27 @@ class Login_controller extends Controller{
 	}
 
 	public function new_password($prams){
-		$this->model('login_model');
 		$this->view('login'.'/'.'new_password.php',$prams);
 		$this->view->render();
 	}
 
 	public function forgotten_password(){
-		$this->model('login_model');
 		$this->view('login'.'/'.'password.php');
 		$this->view->render();
 	}
 
 	public function index(){
-		$this->model('login_model');
 		$this->view('login'.'/'.'index.php',[TRUE]);
 		$this->view->render();	
 	}
 
 	public function register(){
-		$this->model('login_model');
 		$this->view('login'.'/'.'register.php');
 		$this->view->render();	
 	}
 
 	public function valid_login(){
-		$this->model('login_model');
+		$this->model('LoginModel');
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 		$valid = $this->model->validLogin($email,$password);
@@ -82,7 +78,7 @@ class Login_controller extends Controller{
 	}
 
 	public function add_user(){
-		$this->model('login_model');
+		$this->model('LoginModel');
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 		//https://stackoverflow.com/questions/4356289/php-random-string-generator/31107425#31107425

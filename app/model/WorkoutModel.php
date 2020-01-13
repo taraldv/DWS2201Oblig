@@ -1,5 +1,5 @@
 <?php
-class Workout_model extends Model{
+class WorkoutModel extends Model{
 	public function addWorkout($name){
 		$id = $_SESSION['id'];
 		$stmt = $this->prepare("INSERT INTO workout (userId,name) VALUES (:userId,:name);");

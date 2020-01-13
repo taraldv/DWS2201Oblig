@@ -6,8 +6,8 @@ public:
 core:
 	vim -p $(wildcard app/core/*.php)
 login:
-	vim -p $(controller)login_controller.php $(wildcard app/view/login/*.php) $(model)login_model.php
+	vim -p $(controller)LoginController.php $(wildcard app/view/login/*.php) $(model)LoginModel.php
 workout:
-	vim -p $(controller)workout_controller.php $(wildcard app/view/workout/*.php) $(model)workout_model.php
+	vim -p $(controller)WorkoutController.php $(wildcard app/view/workout/*.php) $(model)WorkoutModel.php
 sql:
 	mysql -u oblig oblig < sql.sql

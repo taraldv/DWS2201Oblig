@@ -1,5 +1,5 @@
 <?php
-class Login_model extends Model{
+class LoginModel extends Model{
 	public function validLogin($email,$password){
 		$stmt = $this->prepare("SELECT userId,hash,verified FROM users WHERE email = :email;"); 
 		$stmt->bindParam(':email',$email);

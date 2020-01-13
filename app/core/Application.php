@@ -1,17 +1,15 @@
 <?php
 class Application{
-	protected $controller = 'workout_controller';
+	protected $controller = 'WorkoutController';
 	protected $action = 'index';
 	protected $prams = [];
 
 	public function __construct(){
 		$this->prepareURL();
+		$this->controller = ucfirst($this->controller);
 		$this->checkSession();
 		if(file_exists(CONTROLLER.$this->controller.'.php')){
 			$this->controller = new $this->controller;
-			#var_dump($this->controller);
-			#var_dump($this->action);
-			#var_dump($_SESSION);
 			if(method_exists($this->controller,$this->action)){
 				//for eksempel hvis /login/ besøkes
 				//kjøres index funksjonen i login controller
@@ -24,11 +22,8 @@ class Application{
 		$request = trim($_SERVER['REQUEST_URI'],'/');
 		if(!empty($request)){
 			$url = explode('/',$request);
-			$this->controller = isset($url[0]) ? $url[0].'_controller':'workout_controller';
+			$this->controller = isset($url[0]) ? $url[0].'Controller':'WorkoutController';
 			$this->action = isset($url[1]) ? $url[1] : 'index';
-			/*if(count($_POST)>0){
-				$this->action=$this->action.'_post';
-			}*/
 			unset($url[0],$url[1]);
 			$this->prams = !empty($url) ? array_values($url):[];
 		} 
@@ -36,7 +31,7 @@ class Application{
 
 	protected function checkSession(){
 		session_start();
-		if(!isset($_SESSION['email']) && $this->controller!='login_controller'){
+		if(!isset($_SESSION['email']) && $this->controller!='LoginController'){
 			header('Location: /login');
 		}
 	}
