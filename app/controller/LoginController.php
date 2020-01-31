@@ -47,6 +47,7 @@ class LoginController extends Controller{
 
 	public function new_password(){
 		$token = $_GET['token'];
+		echo "$token";
 		$this->view('login'.'/'.'new_password.php',$token);
 		$this->view->render();
 	}

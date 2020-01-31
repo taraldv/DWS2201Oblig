@@ -1,5 +1,5 @@
 
-<?php include VIEW.'clean_header.php';?>
+<?php include VIEW.'header.php';?>
 
 <form action='/login/update_password' method='post'>
 <input type='password' name='password'>

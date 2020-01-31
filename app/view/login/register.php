@@ -1,4 +1,4 @@
-<?php include VIEW.'clean_header.php';?>
+<?php include VIEW.'header.php';?>
 <div class='container'>
 <form action='/login/add_user' method='post'>
 <div class='form-group'>

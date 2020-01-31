@@ -14,7 +14,7 @@ class View{
 		}
 	}
 
-	public function getAction(){
+	public function getMethod(){
 		return (explode('/',$this->viewFile)[1]);
 	}
 }

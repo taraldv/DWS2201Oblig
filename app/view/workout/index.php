@@ -1,4 +1,5 @@
 <?php include VIEW.'header.php';?>
+<?php include VIEW.'nav.php';?>
 <div class='container'>
 <form>
 	<div class='form-group'>

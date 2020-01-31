@@ -1,7 +1,7 @@
 <?php
 class Application{
 	protected $controller = 'WorkoutController';
-	protected $action = 'index';
+	protected $method = 'index';
 
 	public function __construct(){
 		$this->prepareURL();
@@ -10,9 +10,9 @@ class Application{
 		/* If the controller is a valid php file, create new object */
 		if(file_exists(CONTROLLER.$this->controller.'.php')){
 			$this->controller = new $this->controller;
-			/* If the action is a valid method in the new object, run the method */
-			if(method_exists($this->controller,$this->action)){
-				call_user_func_array([$this->controller,$this->action]);
+			/* If the method is a valid method in the new object, run the method */
+			if(method_exists($this->controller,$this->method)){
+				call_user_func_array([$this->controller,$this->method],[]);
 			}
 		}
 	}
@@ -21,12 +21,14 @@ class Application{
 	protected function prepareURL(){
 		$request = trim($_SERVER['REQUEST_URI'],'/');
 		if(!empty($request)){
-			$url = explode('/',$request);
-			if(isset($url[0])){
-				$this->controller = $url[0].'Controller';
+			//Removes request parameters from url
+			$token = explode('?', $request);
+			$urlArray = explode('/',$token[0]);
+			if(isset($urlArray[0])){
+				$this->controller = $urlArray[0].'Controller';
 			}
-			if(isset($url[1])){
-				$this->action =  $url[1];
+			if(isset($urlArray[1])){
+				$this->method =  $urlArray[1];
 			}
 		} 
 	}
