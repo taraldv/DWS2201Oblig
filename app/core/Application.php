@@ -2,33 +2,36 @@
 class Application{
 	protected $controller = 'WorkoutController';
 	protected $action = 'index';
-	protected $prams = [];
 
 	public function __construct(){
 		$this->prepareURL();
 		$this->controller = ucfirst($this->controller);
 		$this->checkSession();
+		/* If the controller is a valid php file, create new object */
 		if(file_exists(CONTROLLER.$this->controller.'.php')){
 			$this->controller = new $this->controller;
+			/* If the action is a valid method in the new object, run the method */
 			if(method_exists($this->controller,$this->action)){
-				//for eksempel hvis /login/ besøkes
-				//kjøres index funksjonen i login controller
-				call_user_func_array([$this->controller,$this->action],$this->prams);
+				call_user_func_array([$this->controller,$this->action]);
 			}
 		}
 	}
 
+	/* Splits URL into controller object and controller function. Updates variables if they exist.  */
 	protected function prepareURL(){
 		$request = trim($_SERVER['REQUEST_URI'],'/');
 		if(!empty($request)){
 			$url = explode('/',$request);
-			$this->controller = isset($url[0]) ? $url[0].'Controller':'WorkoutController';
-			$this->action = isset($url[1]) ? $url[1] : 'index';
-			unset($url[0],$url[1]);
-			$this->prams = !empty($url) ? array_values($url):[];
+			if(isset($url[0])){
+				$this->controller = $url[0].'Controller';
+			}
+			if(isset($url[1])){
+				$this->action =  $url[1];
+			}
 		} 
 	}
 
+	/* Redirects to login if session not set and not visiting a login page */
 	protected function checkSession(){
 		session_start();
 		if(!isset($_SESSION['email']) && $this->controller!='LoginController'){

@@ -5,9 +5,10 @@ class LoginController extends Controller{
 		header("Location: /");	
 	}
 
-	public function verify($prams){
+	public function verify(){
+		$token = $_GET['token'];
 		$this->model('LoginModel');
-		$update = $this->model->validEmail($prams);
+		$update = $this->model->validEmail($token);
 		if($update){
 			header("Location: /login");
 		} else {
@@ -44,8 +45,9 @@ class LoginController extends Controller{
 		}
 	}
 
-	public function new_password($prams){
-		$this->view('login'.'/'.'new_password.php',$prams);
+	public function new_password(){
+		$token = $_GET['token'];
+		$this->view('login'.'/'.'new_password.php',$token);
 		$this->view->render();
 	}
 

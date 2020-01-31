@@ -16,7 +16,7 @@ class Mail{
 
 	public function setMailBody($bodyDescription,$token,$linkDescription){
 		$this->body = "\"<html><body><p>$bodyDescription</p>
-			<a href='https://oblig.tarves.no$this->url/$token'>$linkDescription</a>
+			<a href='https://oblig.tarves.no$this->url?token=$token'>$linkDescription</a>
 			</body></html>\"";
 	}
 
