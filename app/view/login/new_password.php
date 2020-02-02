@@ -4,10 +4,11 @@
 <div class='container'>
 	<form action='/login/update_password' method='post'>
 		<div class='form-group'>
-			<input class='form-control' type='password' name='password'>
+			<label for='password'>Nytt passord:</label>
+			<input id='password' class='form-control' type='password' name='password'>
 		</div>
 		<div class='form-group'>
-			<input class='form-control' type='submit' value='Send inn nytt passord'>
+			<input class='btn btn-primary' type='submit' value='Send inn nytt passord'>
 			<input hidden name='token' value='<?php echo "$this->viewData" ?>'>
 		</div>
 	</form>
