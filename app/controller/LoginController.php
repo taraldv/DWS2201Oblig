@@ -35,7 +35,7 @@ class LoginController extends Controller{
 		$this->view->render();	
 	}
 
-	/* POST request */
+	/* POST request, sends email with password reset link. */
 	public function send_password_link(){	
 		$this->model('LoginModel');
 		$email = $_POST['email'];
@@ -50,6 +50,7 @@ class LoginController extends Controller{
 		echo "$successfullyAdded";
 	}
 
+	/* Form POST request, updates password and redirects */
 	public function update_password(){
 		$this->model('LoginModel');
 		$token = $_POST['token'];
@@ -61,28 +62,36 @@ class LoginController extends Controller{
 		}
 	}
 
+	/* GET request with a token parameter, renders page to update password */
 	public function new_password(){
 		$token = $_GET['token'];
-		echo "$token";
-		$this->view('login'.'/'.'new_password.php',$token);
-		$this->view->render();
+		if(isset($token)){
+			$this->view('login'.'/'.'new_password.php',$token);
+			$this->view->render();
+		} else {
+			header("Location: /login/forgotten_password");
+		}
 	}
 
+	/* GET request , renders page to write email for password update*/
 	public function forgotten_password(){
 		$this->view('login'.'/'.'password.php');
 		$this->view->render();
 	}
 
+	/* GET request, renders page for login */
 	public function index(){
 		$this->view('login'.'/'.'index.php',[TRUE]);
 		$this->view->render();	
 	}
 
+	/* GET request, renders page for registering new user */
 	public function register(){
 		$this->view('login'.'/'.'register.php');
 		$this->view->render();	
 	}
 
+	/* Form POST request, checks if valid login credentials. Redirects to workout or renders login page. */
 	public function valid_login(){
 		$this->model('LoginModel');
 		$email = $_POST['email'];
@@ -96,6 +105,7 @@ class LoginController extends Controller{
 		}
 	}
 
+	/* Form POST request, adds new user to database and sends verification email and then renders login page */
 	public function add_user(){
 		$this->model('LoginModel');
 		$email = $_POST['email'];
