@@ -17,9 +17,10 @@ foreach ($this->viewData[0] as $selectArr){
 </form>
 <table id='logTable' class='table table-striped'><thead class="thead-dark">
 <tr><th>Reps</th><th>Kilo</th><th>Dato</th><th>Slett knapp</th></tr></thead>
+<tbody id='logTableBody'></tbody>
 </table>
 </div>
 <script>
-getWorkoutSelectData();
+applyIndexEventListener();
 </script>
 <?php include VIEW.'footer.php';?>

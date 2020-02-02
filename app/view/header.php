@@ -7,3 +7,4 @@
 	<link href="/bootstrap.min.css" type="text/css" media="all" rel="stylesheet">
 </head>
 <body>
+<script src='/script.js'></script>

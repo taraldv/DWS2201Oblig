@@ -35,7 +35,8 @@ class WorkoutController extends Controller{
 		$workoutId = $_POST['workoutId'];
 		$lastInsertArray = $this->model->logWorkout($kilo,$reps,$workoutId);
 		if($lastInsertArray){
-			$name = $lastInsertArray['name'];
+			echo (json_encode($lastInsertArray));
+			/*$name = $lastInsertArray['name'];
 			$reps = $lastInsertArray['reps'];
 			$kilo = $lastInsertArray['kilo'];
 			$date = $lastInsertArray['date'];
@@ -44,7 +45,7 @@ class WorkoutController extends Controller{
 			echo "{\"element\":\"$element\",
 			\"idType\":\"logId\",
 			\"divClass\":\"deleteButton\",
-			\"url\":\"delete_log\"}";
+			\"url\":\"delete_log\"}";*/
 		} else {
 			echo '0';
 		}
@@ -58,12 +59,14 @@ class WorkoutController extends Controller{
 		$this->model('WorkoutModel');
 		$name = $_POST['name'];
 		$lastInsertId = $this->model->addWorkout($name);
+		$dataArray = array("name"=>$name,"id"=>$lastInsertId);
 		if(isset($lastInsertId)){
-			$element = "<tr><td>$name</td><td><button class='deleteButton btn btn-block btn-secondary' data=$lastInsertId>Slett</button></td></tr>";
+			echo (json_encode($dataArray));
+			/*$element = "<tr><td>$name</td><td><button class='deleteButton btn btn-block btn-secondary' data=$lastInsertId>Slett</button></td></tr>";
 			echo "{\"element\":\"$element\",
 			\"idType\":\"workoutId\",
 			\"divClass\":\"deleteButton\",
-			\"url\":\"delete_workout\"}";
+			\"url\":\"delete_workout\"}";*/
 		} else {
 			echo '0';
 		}
