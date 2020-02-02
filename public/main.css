@@ -2,4 +2,6 @@ form{
 	width:30%;
 	margin:auto;
 }
-
+#errorMessageDiv{
+	text-align: center;
+}

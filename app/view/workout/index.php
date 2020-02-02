@@ -22,6 +22,6 @@
 	</table>
 </div>
 <script>
-applyIndexEventListener();
+	applyIndexEventListener();
 </script>
 <?php include VIEW.'footer.php';?>

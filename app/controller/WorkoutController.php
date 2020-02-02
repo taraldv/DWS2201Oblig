@@ -62,11 +62,6 @@ class WorkoutController extends Controller{
 		$dataArray = array("name"=>$name,"id"=>$lastInsertId);
 		if(isset($lastInsertId)){
 			echo (json_encode($dataArray));
-			/*$element = "<tr><td>$name</td><td><button class='deleteButton btn btn-block btn-secondary' data=$lastInsertId>Slett</button></td></tr>";
-			echo "{\"element\":\"$element\",
-			\"idType\":\"workoutId\",
-			\"divClass\":\"deleteButton\",
-			\"url\":\"delete_workout\"}";*/
 		} else {
 			echo '0';
 		}
