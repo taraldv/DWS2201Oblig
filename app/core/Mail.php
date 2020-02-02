@@ -21,8 +21,8 @@ class Mail{
 	}
 
 	public function sendMail(){
-		//Sender to kommandoer til bash, første lagrer string i $body i en temp fil.
-		//Så sendes denne filen med som body i mail kommando med < 
+		/* Runs two bash commands, first stores the would be mail body in a temporary file.
+		Then a mail command is run with its mail body from the same temporary file */
 		$bashStr = 'echo '.$this->body.' > /tmp/mailbody &&
 		       	mail -a '.$this->content.' -s "'.$this->subject.'" -r '.$this->sender.' '.$this->email.' < /tmp/mailbody';
 		shell_exec($bashStr);

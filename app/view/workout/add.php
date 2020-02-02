@@ -15,6 +15,7 @@
 			<tr><th>Øvelse navn</th><th>Slett knapp</th></tr>
 		</thead>
 		<?php
+			/* Builds table from controller data */
 			foreach ($this->viewData as $arr){
 				$id=$arr['workoutId'];
 				$name=$arr['name'];

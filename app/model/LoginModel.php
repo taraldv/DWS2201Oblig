@@ -1,5 +1,7 @@
 <?php
 class LoginModel extends Model{
+
+	/* Reads user data for specific email, creates session if valid password */
 	public function validLogin($email,$password){
 		$stmt = $this->prepare("SELECT userId,hash,verified FROM users WHERE email = :email;"); 
 		$stmt->bindParam(':email',$email);
@@ -18,6 +20,7 @@ class LoginModel extends Model{
 		}
 	}
 
+	/* Create new user data */
 	public function register($email,$password,$token){
 		$hash = password_hash($password,PASSWORD_DEFAULT);
 		$stmt = $this->prepare("INSERT INTO users (email,hash,token) VALUES (:email,:hash,:token);");
@@ -27,12 +30,14 @@ class LoginModel extends Model{
 		return $stmt->execute();
 	}
 
+	/* Update user verified and token for specific token */
 	public function validEmail($token){
-		$stmt = $this->prepare("UPDATE users SET verified = TRUE WHERE token = :token;");
+		$stmt = $this->prepare("UPDATE users SET verified = TRUE, token = NULL WHERE token = :token;");
 		$stmt->bindParam(':token',$token);
 		return $stmt->execute();	
 	}
 
+	/* Update user token for specific email */
 	public function setNewToken($email,$token){
 		$stmt = $this->prepare("UPDATE users SET token = :token WHERE email = :email;");
 		$stmt->bindParam(':token',$token);
@@ -40,6 +45,7 @@ class LoginModel extends Model{
 		return $stmt->execute();
 	}
 
+	/* Update user password for specific token */
 	public function updatePassword($token,$password){
 		$hash = password_hash($password,PASSWORD_DEFAULT);
 		$stmt = $this->prepare("UPDATE users set hash = :hash WHERE token = :token;");

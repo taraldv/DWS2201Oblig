@@ -173,3 +173,27 @@ function insertErrorMessage(msg){
 	let div = '<div id="errorMessageDiv" class="alert alert-danger" role="alert">'+msg+'</div>';
 	document.body.insertAdjacentHTML('afterbegin',div);
 }
+
+function applyPasswordEventListener(){
+	/* Disables normal form event, and enables javascript request */
+	let formElement = document.getElementById('sendMailPasswordTokenForm');
+	formElement.addEventListener("submit",function(e){
+		let email = document.getElementById('email');
+		e.preventDefault();
+
+		/* Sends request, inserts data from server in table as html */
+		let request = new XMLHttpRequest();
+		request.addEventListener("load",function(){
+			removeErrorMessage();
+			if(this.response != 0){
+				let msg = '<div id="errorMessageDiv" class="alert alert-success" role="alert">Sjekk epost for link</div>';
+				document.body.insertAdjacentHTML('afterbegin',msg);
+			} else {
+				insertErrorMessage("Feil ved database, prøv igjen eller kontakt nettside administrator");
+			}
+		});
+		request.open("POST",'/login/send_password_link');
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		request.send("email="+email.value);
+	});
+}

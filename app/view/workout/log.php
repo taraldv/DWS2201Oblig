@@ -33,6 +33,7 @@
 		<tr><th>Øvelse navn</th><th>Reps</th><th>Kilo</th><th>Dato</th><th>Slett knapp</th></tr></thead>
 		<tbody>
 			<?php
+				/* Builds table from controller data */
 				foreach ($this->viewData[1] as $arr){
 					$id=$arr['logId'];
 					$name=$arr['name'];

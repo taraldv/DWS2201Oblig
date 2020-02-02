@@ -1,5 +1,7 @@
 <?php
 class WorkoutModel extends Model{
+
+	/* Create a new workout */
 	public function addWorkout($name){
 		$id = $_SESSION['id'];
 		$stmt = $this->prepare("INSERT INTO workout (userId,name) VALUES (:userId,:name);");
@@ -8,6 +10,8 @@ class WorkoutModel extends Model{
 		$stmt->execute();		
 		return $this->lastInsertId();
 	}
+
+	/* Read workout name and id for specific user */
 	public function getWorkouts(){
 		$id = $_SESSION['id'];
 		$stmt = $this->prepare("SELECT workoutId,name FROM workout WHERE userId = :userId;");
@@ -17,6 +21,7 @@ class WorkoutModel extends Model{
 		return $result;
 	}
 
+	/* Read workout log data for specific user and specific excercise */
 	public function getSpecificLogHistory($workoutId){
 		$userId = $_SESSION['id'];
 		$stmt = $this->prepare("SELECT 
@@ -29,6 +34,9 @@ class WorkoutModel extends Model{
 		return $result;
 
 	}
+
+	/* Create new log data for specific user and excercise.
+	Then reads the same data if successfully added. */
 	public function logWorkout($kilo,$reps,$workoutId){
 		$userId = $_SESSION['id'];
 		$stmt = $this->prepare("INSERT INTO log (workoutId,userId,reps,kilo,date) 
@@ -51,6 +59,8 @@ class WorkoutModel extends Model{
 			return 0;
 		}
 	}
+
+	/* Read workout log data for specific user */
 	public function getLog(){
 		$userId = $_SESSION['id'];
 		$stmt = $this->prepare("SELECT 
@@ -63,6 +73,8 @@ class WorkoutModel extends Model{
 		return $result;
 	
 	}
+
+	/* Delete workout log data for specific user and excercise */
 	public function deleteLog($logId){
 		$userId = $_SESSION['id'];
 		$stmt = $this->prepare("DELETE FROM log WHERE logId = :logId AND userId = :userId;");
@@ -70,6 +82,9 @@ class WorkoutModel extends Model{
 		$stmt->bindParam(':userId',$userId);
 		return $stmt->execute();
 	}
+
+	/* Transaction delete log data tied to a specific excercise and user.
+	Then deletes said excercise. Rollback if something fails */
 	public function deleteWorkout($workoutId){
 		$userId = $_SESSION['id'];
 		$this->beginTransaction();
@@ -87,7 +102,6 @@ class WorkoutModel extends Model{
 			$this->rollback();
 		}
 		return ($logRowsDeleted && $workoutDeleted);
-		
 	}
 }
 ?>
