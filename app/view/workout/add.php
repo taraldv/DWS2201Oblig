@@ -1,5 +1,7 @@
 <?php include VIEW.'header.php';?>
 <?php include VIEW.'nav.php';?>
+<h1 class="display-4 text-center">Legg til øvelse</h1>
+<br>
 <div class='container'>
 	<form id='addWorkoutForm'>
 		<div class ='form-group'>
@@ -10,9 +12,9 @@
 			<input class='btn btn-primary' type='submit' value='Legg til øvelse'>
 		</div>
 	</form>
-	<table class='table table-striped'>
+	<table class='table w-auto table-dark table-striped'>
 		<thead class='thead-dark'>
-			<tr><th>Øvelse navn</th><th>Slett knapp</th></tr>
+			<tr><th>Øvelse navn</th><th id='deleteButtonColumn'></th></tr>
 		</thead>
 		<?php
 			/* Builds table from controller data */

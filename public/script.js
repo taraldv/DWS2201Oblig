@@ -29,10 +29,10 @@ function buildSpecificLogTable(){
 	let tableBody = document.getElementById("logTableBody");
 
 	/* Deletes old rows from table before inserting new ones */
-	let deleteRows = tableBody.getElementsByClassName('generatedRow');
-	for(let j=0;j<deleteRows.length;j++){
-		deleteRows[j].remove();
+	while (tableBody.firstChild) {
+		tableBody.removeChild(tableBody.firstChild);
 	}
+
 	let data = JSON.parse(this.response);
 	let keys = Object.keys(data);
 	/* Builds html table from server data as a string */

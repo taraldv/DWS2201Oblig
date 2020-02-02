@@ -1,6 +1,7 @@
 <?php 
 $action = $this->getMethod();
 ?>
+<br>
 <nav>
 	<ul class='nav nav-pills justify-content-center'>
 	<li class='nav-item'><a class='nav-link 
@@ -27,4 +28,5 @@ $action = $this->getMethod();
 		<li class='nav-item'><a class='nav-link' href="/login/logout">Logout</a></li>
 	</ul>
 </nav>
+<br>
 

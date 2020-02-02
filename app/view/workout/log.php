@@ -1,6 +1,7 @@
-
 <?php include VIEW.'header.php';?>
 <?php include VIEW.'nav.php';?>
+<h1 class="display-4 text-center">Logg øvelse</h1>
+<br>
 <div class='container'>
 	<form id='addLogForm'>
 		<div class='form-group'>
@@ -29,8 +30,8 @@
 			<input id='workoutId' name='workoutId' hidden value="<?php echo $this->viewData[0][0]['workoutId'] ?>">
 		</div>
 	</form>
-	<table class='table table-striped'><thead class="thead-dark">
-		<tr><th>Øvelse navn</th><th>Reps</th><th>Kilo</th><th>Dato</th><th>Slett knapp</th></tr></thead>
+	<table class='table table-striped table-dark w-auto'><thead class="thead-dark">
+		<tr><th>Øvelse navn</th><th>Reps</th><th>Kilo</th><th>Dato</th><th id='deleteButtonColumn'></th></tr></thead>
 		<tbody>
 			<?php
 				/* Builds table from controller data */

@@ -1,5 +1,7 @@
 <?php include VIEW.'header.php';?>
 <?php include VIEW.'nav.php';?>
+<h1 class="display-4 text-center">Øvelse historikk</h1>
+<br>
 <div class='container'>
 	<form>
 		<div class='form-group'>
@@ -16,8 +18,8 @@
 			</select>
 		</div>
 	</form>
-	<table id='logTable' class='table table-striped'><thead class="thead-dark">
-		<tr><th>Reps</th><th>Kilo</th><th>Dato</th><th>Slett knapp</th></tr></thead>
+	<table id='logTable' class='table w-auto table-dark table-striped'><thead class="thead-dark">
+		<tr><th>Reps</th><th>Kilo</th><th>Dato</th><th id='deleteButtonColumn'></th></tr></thead>
 		<tbody id='logTableBody'></tbody>
 	</table>
 </div>

@@ -1,4 +1,6 @@
 <?php include VIEW.'header.php';?>
+<h1 class="display-1 text-center">Trenings logg</h1>
+<img class="mx-auto d-block" src="/img/logo.png">
 <div class='container'>
 	<form action='/login/new_verify' method='post'>
 		<div class='form-group'>
