@@ -12,15 +12,11 @@ class LoginController extends Controller{
 		$token = $_GET['token'];
 		$this->model('LoginModel');
 		$update = $this->model->validEmail($token);
-		if($update){
-			header("Location: /login");
-		} else {
-			header("Location: /login/new_verify");
-		}
+		header("Location: /login");
 	}
 
 	/* GET request and form post request */
-	public function new_verify(){
+	/*public function new_verify(){
 		$this->model('LoginModel');
 		$email = $_POST['email'];
 		//https://stackoverflow.com/questions/4356289/php-random-string-generator/31107425#31107425
@@ -33,7 +29,7 @@ class LoginController extends Controller{
 		}	
 		$this->view('login'.'/'.'token.php',[$successfullyAdded]);
 		$this->view->render();	
-	}
+	}*/
 
 	/* POST request, sends email with password reset link. */
 	public function send_password_link(){	
