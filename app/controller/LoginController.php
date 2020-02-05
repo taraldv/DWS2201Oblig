@@ -15,7 +15,7 @@ class LoginController extends Controller{
 		if($update){
 			header("Location: /login");
 		} else {
-			header("Location: /login/token");
+			header("Location: /login/new_verify");
 		}
 	}
 
