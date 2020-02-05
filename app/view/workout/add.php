@@ -16,14 +16,16 @@
 		<thead class='thead-dark'>
 			<tr><th>Øvelse navn</th><th id='deleteButtonColumn'></th></tr>
 		</thead>
-		<?php
-			/* Builds table from controller data */
-			foreach ($this->viewData as $arr){
-				$id=$arr['workoutId'];
-				$name=$arr['name'];
-				echo "<tr><td>$name</td><td><button class='btn btn-secondary btn-block deleteButton' data=$id>Slett</button></td></tr>";
-			}
-		?>
+		<tbody>
+			<?php
+				/* Builds table from controller data */
+				foreach ($this->viewData as $arr){
+					$id=$arr['workoutId'];
+					$name=$arr['name'];
+					echo "<tr><td>$name</td><td><button class='btn btn-secondary btn-block deleteButton' data=$id>Slett</button></td></tr>";
+				}
+			?>
+		</tbody>
 	</table>
 </div>
 <script>
