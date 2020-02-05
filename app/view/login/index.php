@@ -1,4 +1,9 @@
 <?php include VIEW.'header.php';?>
+<?php 
+	if(!$this->viewData[0]){
+		echo "<div id='errorMessageDiv' class='alert alert-danger'>Feil epost,passord eller ikke bekreftet epost</div>";
+	}
+?>
 <h1 class="display-1 text-center">Trenings logg</h1>
 <img class="mx-auto d-block" src="/img/logo.png">
 <div class='container'>
@@ -22,10 +27,5 @@
 		</div>
 	</form>
 </div>
-<?php 
-	if(!$this->viewData[0]){
-		echo "<h1>Feil epost,passord eller ikke bekreftet epost</h1>";
-	}
-?>
 <?php include VIEW.'footer.php';?>
 

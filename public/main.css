@@ -2,8 +2,7 @@ body{
 	background-color: whitesmoke !important;
 }
 form{	
-	width:30%;
-	margin:auto;
+
 }
 #errorMessageDiv{
 	text-align: center;
@@ -11,5 +10,4 @@ form{
 .table {
     width: 50%;
     margin: 0px auto;
-    min-width: 400px;
 }
