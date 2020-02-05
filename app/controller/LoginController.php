@@ -15,7 +15,6 @@ class LoginController extends Controller{
 		header("Location: /login");
 	}
 
-
 	/* POST request, sends email with password reset link. */
 	public function send_password_link(){	
 		$this->model('LoginModel');
