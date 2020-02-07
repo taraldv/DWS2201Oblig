@@ -42,7 +42,7 @@ function buildSpecificLogTable(){
 		let kilo = tempObject[1];
 		let reps = tempObject[2];
 		let dato = tempObject[3];
-		let string = "<tr class='generatedRow'><td>"+reps+"</td><td>"+kilo+"</td><td>"+dato+"</td>"+getDeleteButton(id)+"</tr>";
+		let string = "<tr class='generatedRow'><td>"+kilo+"</td><td>"+reps+"</td><td>"+dato+"</td>"+getDeleteButton(id)+"</tr>";
 		tableBody.insertAdjacentHTML('beforeend',string);
 	}
 	enableDeleteButton('logId','deleteButton','delete_log');
